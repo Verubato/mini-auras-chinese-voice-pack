@@ -5,6 +5,7 @@ local BASE_PATH = "Interface\\AddOns\\" .. addonName .. "\\Sounds\\"
 -- The clips speak Mandarin spell names, which both Chinese clients read.
 local LOCALES = { "zhCN", "zhTW" }
 local PACK_NAMES = { "Amy", "Anna Su", "Jason Chen" }
+local MINIAURAS = "MiniAuras"
 
 local waiter
 
@@ -35,9 +36,13 @@ if not RegisterPacks() then
 	waiter = CreateFrame("Frame")
 
 	waiter:RegisterEvent("ADDON_LOADED")
-	waiter:SetScript("OnEvent", function(self)
-		if RegisterPacks() then
-			self:UnregisterAllEvents()
+	waiter:SetScript("OnEvent", function(self, _, loaded)
+		if loaded ~= MINIAURAS then
+			return
 		end
+
+		-- Its one chance: once MiniAuras has loaded, waiting longer cannot make the API appear.
+		self:UnregisterAllEvents()
+		RegisterPacks()
 	end)
 end
