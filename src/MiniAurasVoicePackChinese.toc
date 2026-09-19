@@ -1,4 +1,4 @@
-## Interface: 120100
+## Interface: 120100, 16001
 ## Title: MiniAurasVoicePackChinese
 ## Notes: Mandarin voice packs for the MiniAuras alert announcements.
 ## Category: Mini
